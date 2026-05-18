@@ -20,7 +20,15 @@ const app = express();
 
 // Security & utility middlewares
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: [
+    "https://heartfelt-crisp-8a9ee9.netlify.app",
+    "http://localhost:3000"
+  ],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 app.use(morgan("dev"));
 
 app.use("/api/webhooks", webhookRoutes);
