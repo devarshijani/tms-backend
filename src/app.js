@@ -21,10 +21,9 @@ const app = express();
 // Security & utility middlewares
 app.use(helmet());
 app.use(cors({
-  origin: "*",
-  credentials: false,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 }));
 app.use(morgan("dev"));
 
