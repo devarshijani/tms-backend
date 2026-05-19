@@ -14,10 +14,12 @@ const validate = (schema) => (req, res, next) => {
     next();
 };
 
-// Only superadmin manages plans, anyone logged in can view plans
+// Public: anyone can view plans (needed for registration page)
+router.get("/", planController.getAllPlans);
+router.get("/:id", planController.getPlanById);
+
+// Protected: only superadmin can manage plans
 router.post("/", authenticate, authorize("superadmin"), validate(createPlanValidation), planController.createPlan);
-router.get("/", authenticate, planController.getAllPlans);
-router.get("/:id", authenticate, planController.getPlanById);
 router.put("/:id", authenticate, authorize("superadmin"), validate(updatePlanValidation), planController.updatePlan);
 router.delete("/:id", authenticate, authorize("superadmin"), planController.deletePlan);
 
